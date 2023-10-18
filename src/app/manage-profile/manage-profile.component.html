@@ -1,0 +1,9 @@
+<div id="ManageProfile">
+    <button mat-button [matMenuTriggerFor]="menu" [color]='1'>Ciao: {{nomeUtente}}</button>
+    <mat-menu #menu="matMenu" >
+        <button mat-menu-item (click)="deleteUtente()">Delete account</button>
+        <button mat-raised-button (click)="openMenuChange()">Cambio account</button>
+         
+      </mat-menu>
+  
+</div>
