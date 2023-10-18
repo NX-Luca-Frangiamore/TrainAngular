@@ -1,11 +1,11 @@
 <div class="divContainer">
-     <h1>Login</h1>
-     <div [formGroup]="form">
-          <label>Username</label><br>
-          <input type="text" name="username" formControlName="username"><br>
-          <label>Password</label><br>
-          <input type="password" name="password" formControlName="password"><br>
-          <button (click)="Login()">Login</button>
-          <button (click)="SignIn()">Sign in</button>
-        </div>
+  <h1>Login</h1>
+  <div [formGroup]="loginForm">
+    <label>Username</label><br>
+    <input type="text" name="username" formControlName="username"><br>
+    <label>Password</label><br>
+    <input type="password" name="password" formControlName="password"><br>
+    <button (click)="onLoginClick()">Login</button>
+    <button (click)="onSinginClick()">Sign in</button>
+  </div>
 </div>

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import {FormControl, FormGroup } from '@angular/forms'
-import { HttpClient,HttpHeaders, HttpParams } from '@angular/common/http';
-import { ManageTokenService } from '../manage-token.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { LoginService } from './login.service';
+import { ManageTokenService as TokenManagerService } from '../manage-token.service';
+import { tap } from 'rxjs';
 import { Router } from '@angular/router';
-import { url } from '../app.module';
-import { RepositoryService } from '../repository.service';
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,37 +13,30 @@ import { RepositoryService } from '../repository.service';
 })
 export class LoginComponent {
 
-  form:FormGroup= new FormGroup({
-    username: new FormControl(''),
-    password:new FormControl(''),
-})
-  
-  constructor(private http:RepositoryService,private token:ManageTokenService,private _router: Router){
+  loginForm = new FormGroup({
+    username: new FormControl<string>('', Validators.required),
+    password: new FormControl<string>('', Validators.required),
+  })
+
+
+  constructor(private readonly loginService: LoginService,
+    private readonly tokenManagerSertvice: TokenManagerService,
+    private readonly router: Router) {
   }
-  private getParmsWithUsernamePassword(){
-    let params = new HttpParams()
-    .set("username", this.form.get("username")?.value)
-    .set("password", this.form.get("password")?.value);
-    return params
+
+
+  onLoginClick() {
+    if (!this.loginForm.valid) return
+
+    this.loginService.logIn$(this.loginForm.controls['username'].value!, this.loginForm.controls['password'].value!).pipe(
+      tap(token => this.tokenManagerSertvice.setToken(token)),
+      tap(() => this.router.navigate(["home"])),
+    ).subscribe()
   }
-  async Login() {
-    let parms=this.getParmsWithUsernamePassword()
-    let token=await this.http.getToken(parms);                            
-    if(typeof token ==="string"){
-       this.token.setToken(token)
-       this._router.navigate(["home"])
-    }else
-       alert("credenziali non corrette")
+
+  onSinginClick() {
+
   }
-  async SignIn(){
-    let parms=this.getParmsWithUsernamePassword()
-   
-    let token=await this.http.newUtente(parms)
-    console.log("fdffe")
-    if(typeof token==="string"){
-       this.token.setToken(token)
-       this._router.navigate(["home"])
-    }else
-       alert("Impossibile creare l'account")
-  }
+
+
 }
