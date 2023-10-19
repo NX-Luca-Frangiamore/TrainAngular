@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { LoginService } from './login.service';
 import { ManageTokenService as TokenManagerService } from '../infrastructure/token-manager/manage-token.service';
-import { tap } from 'rxjs';
+import { catchError, tap } from 'rxjs';
 import { Router } from '@angular/router';
 
 

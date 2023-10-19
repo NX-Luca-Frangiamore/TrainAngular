@@ -15,7 +15,7 @@ export class UserChangeComponent {
 })
 constructor(private service:UserAreaService,private router:Router){}
 async changeUtente(){
-  await this.service.changeUser(this.form.get("newUsername")?.value,this.form.get("newPassword")?.value).subscribe()
+  await this.service.changeCurrentUser(this.form.get("newUsername")?.value,this.form.get("newPassword")?.value).subscribe()
   this.router.navigate(["home"])
 }
 }

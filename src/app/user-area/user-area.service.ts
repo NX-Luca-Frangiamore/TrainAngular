@@ -26,20 +26,20 @@ export class UserAreaService {
       map(x => x)
     )
   }
-  changeUser(newUsername: string, newPassword: string): Observable<string> {
+  changeCurrentUser(newUsername: string, newPassword: string): Observable<string> {
     return this.proxy.putUser$(newUsername, newPassword, this.tokenManager.getToken()).pipe(
       map(x => x)
     )
   }
-  deleteUser(): Observable<string> {
+  deleteCurrentUser(): Observable<string> {
     return this.proxy.deleteUser$(this.tokenManager.getToken()).pipe(
       map(x => x)
     )
   }
-  getUser(): Observable<User> {
+  getCurrentUsername(): Observable<string> {
     return this.proxy.getUser$(this.tokenManager.getToken()).pipe(
       map(dto => {
-        return { name: dto.usernameUtente, password: '' }
+        return dto.usernameUtente
       })
     )
 
