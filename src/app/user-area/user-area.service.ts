@@ -11,20 +11,17 @@ import { DTOGetPassword } from '../infrastructure/DTOs/get-password';
 export class UserAreaService {
 
   constructor(private proxy: PasswordGenProxyService, private tokenManager: ManagerTokenService) {
-
   }
+
   getPassword(namePassword: string): Observable<Password> {
     return this.proxy.getPassword(namePassword, this.tokenManager.getToken()).pipe(
-      map((x: DTOGetPassword) => {
-        let p = new Password()
-        p.name = x.name
-        p.password = x.password
-        return p
+      map(dto => {
+        return { key: dto.name, value: dto.password }
       })
     )
   }
 
-  NewPassword(namePassword: string, password: string): Observable<string> {
+  createPassword(namePassword: string, password: string): Observable<string> {
     return this.proxy.postPassword(namePassword, password, this.tokenManager.getToken()).pipe(
       map(x => x)
     )
@@ -34,17 +31,15 @@ export class UserAreaService {
       map(x => x)
     )
   }
-  deleteUtente(): Observable<string> {
+  deleteUser(): Observable<string> {
     return this.proxy.deleteUser$(this.tokenManager.getToken()).pipe(
       map(x => x)
     )
   }
   getUser(): Observable<User> {
     return this.proxy.getUser$(this.tokenManager.getToken()).pipe(
-      map(x => {
-        let u = new User()
-        u.name = x.usernameUtente
-        return u;
+      map(dto => {
+        return { name: dto.usernameUtente, password: '' }
       })
     )
 

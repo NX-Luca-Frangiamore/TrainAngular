@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl,FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { UserAreaService } from '../user-area.service';
 import { catchError, tap } from 'rxjs';
 @Component({
@@ -8,20 +8,20 @@ import { catchError, tap } from 'rxjs';
   styleUrls: ['./add-password-panel.component.scss']
 })
 export class AddPasswordPanelComponent {
-  StatusRequest="Undone"
-  form:FormGroup=new FormGroup({
-     namePassword:new FormControl(""),
-     password:new FormControl("")
-   })
-  constructor(private proxy:UserAreaService){
+  StatusRequest = "Undone"
+  form: FormGroup = new FormGroup({
+    namePassword: new FormControl(""),
+    password: new FormControl("")
+  })
+  constructor(private proxy: UserAreaService) {
 
   }
-  async addPassword(){
+  async addPassword() {
 
-    this.proxy.NewPassword(this.form.get("namePassword")?.value,this.form.get("password")?.value).pipe(
-      tap(()=>this.StatusRequest='Done'),
-      catchError(()=>this.StatusRequest='Undone')
+    this.proxy.createPassword(this.form.get("namePassword")?.value, this.form.get("password")?.value).pipe(
+      tap(() => this.StatusRequest = 'Done'),
+      catchError(() => this.StatusRequest = 'Undone')
     ).subscribe()
-        
+
   }
 }

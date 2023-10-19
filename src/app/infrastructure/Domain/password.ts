@@ -1,4 +1,4 @@
-export class Password{
-    name!:string;
-    password!:string;
+export interface Password {
+    key: string
+    value: string
 }
