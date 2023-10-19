@@ -15,5 +15,10 @@ export class LoginService {
       map(dto => dto)
     )
   }
+  SignIn$(username: string, password: string): Observable<string> {
+    return this.passwordGenProxyService.signIn$(username, password).pipe(
+      map(dto => dto)
+    )
+  }
 
 }

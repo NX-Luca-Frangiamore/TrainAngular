@@ -1,24 +1,27 @@
 import { Component } from '@angular/core';
 import { UserAreaService } from '../user-area.service';
 import { Route, Router } from '@angular/router';
-import { Input } from '@angular/core';
-
+import { Input,Output } from '@angular/core';
+import {tap}from 'rxjs'
 @Component({
   selector: 'app-profile-options',
   templateUrl: './profile-options.component.html',
   styleUrls: ['./profile-options.component.scss']
 })
 export class ProfileOptionsComponent {
-  @Input() nomeUtente!: string
+  nomeUtente!: string
 
-
-  menuChange = false
-  constructor(private proxy:UserAreaService, private router: Router) { }
+  constructor(private proxy:UserAreaService, private router: Router) {
+    proxy.getUser().pipe(
+      tap((x)=>this.nomeUtente= x.name)
+    ).subscribe()
+  }
   openMenuChange() {
     this.router.navigate(["home/changeUtente"])
   }
   deleteUtente() {
-    this.proxy.deleteUtente()
+    this.proxy.deleteUtente().subscribe()
     this.router.navigate(["/"])
   }
+  
 }

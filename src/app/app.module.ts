@@ -7,8 +7,7 @@ import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
-import { ManageTokenService } from './manage-token.service';
-import { RouterModule } from '@angular/router';
+import { ManageTokenService } from './infrastructure/token-manager/manage-token.service';
 
 import { MatExpansionModule } from '@angular/material/expansion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,6 +18,7 @@ import { GetPasswordPanelComponent } from './user-area/get-password-panel/get-pa
 import { ProfileOptionsComponent } from './user-area/profile-options/profile-options.component';
 import { UserAreaComponent } from './user-area/user-area.component';
 import { AddPasswordPanelComponent } from './user-area/add-password-panel/add-password-panel.component';
+import { UserChangeComponent } from './user-area/user-change/user-change.component';
 export const url: string = "https://localhost:7134"
 @NgModule({
   declarations: [
@@ -27,7 +27,8 @@ export const url: string = "https://localhost:7134"
     GetPasswordPanelComponent,
     ProfileOptionsComponent,
     UserAreaComponent,
-    AddPasswordPanelComponent
+    AddPasswordPanelComponent,
+    UserChangeComponent
 
   ],
   imports: [
@@ -35,7 +36,6 @@ export const url: string = "https://localhost:7134"
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule,
     MatExpansionModule,
     BrowserAnimationsModule,
     MatButtonModule,

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { LoginService } from './login.service';
-import { ManageTokenService as TokenManagerService } from '../manage-token.service';
+import { ManageTokenService as TokenManagerService } from '../infrastructure/token-manager/manage-token.service';
 import { tap } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -30,12 +30,17 @@ export class LoginComponent {
 
     this.loginService.logIn$(this.loginForm.controls['username'].value!, this.loginForm.controls['password'].value!).pipe(
       tap(token => this.tokenManagerSertvice.setToken(token)),
- 
+      tap(() => this.router.navigate(["home"]))
     ).subscribe()
   }
 
   onSinginClick() {
+    if (!this.loginForm.valid) return
 
+    this.loginService.SignIn$(this.loginForm.controls['username'].value!, this.loginForm.controls['password'].value!).pipe(
+      tap(token => this.tokenManagerSertvice.setToken(token)),
+      tap(() => this.router.navigate(["home"]))
+    ).subscribe()
   }
 
 

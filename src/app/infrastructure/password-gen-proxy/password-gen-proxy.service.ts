@@ -1,32 +1,36 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { GetPassword } from '../DTOs/get-password';
-import { LogInRequestDto } from '../DTOs/log-in-request.dto';
-import { User } from '../DTOs/user';
+import { DTOGetPassword } from '../DTOs/get-password';
+import { DTOGetUser } from '../DTOs/get-user';
 @Injectable({
   providedIn: 'root'
 })
 export class PasswordGenProxyService {
 
-  private readonly baseUrl = '' // TODO: mettere url
+  private readonly baseUrl = 'https://localhost:7134'
 
   constructor(private readonly http: HttpClient) { }
 
-  logIn$(username: string, pasword: string): Observable<string> {
-    const dto: LogInRequestDto = {
-      username: username,
-      password: pasword
-    }
+  logIn$(username: string, password: string): Observable<string> {
+    let h=new HttpParams()
+    .append("username",username)
+    .append("password",password)
 
-    return this.http.post<string>(this.baseUrl + '/login', dto)
+    return this.http.post<string>(this.baseUrl + '/login', null,{params:h})
   }
-  getUser(token: string | null):Observable<User>{
+  signIn$(username:string,password:string): Observable<string> {
+    let parms=new HttpParams()
+    .append("username",username)
+    .append("password",password)
+    return this.http.post<string>(this.baseUrl + "/api/utente/new",null, { params: parms});
+  }
+  getUser$(token: string | null):Observable<DTOGetUser>{
     let header={ Authorization: "Bearer " + token }
-    return this.http.get<User>(this.baseUrl+'/api/utente/get',{headers:header})
+    return this.http.get<DTOGetUser>(this.baseUrl+'/api/utente/get',{headers:header})
   }
 
-  changeUser(token: string,usernameNew:string,passwordNew:string): Observable<string> {
+  putUser$(usernameNew:string,passwordNew:string,token: string): Observable<string> {
     let parms=new HttpParams()
     .append("usernameNew",usernameNew)
     .append("passwordNew",passwordNew)
@@ -35,31 +39,26 @@ export class PasswordGenProxyService {
   }
   
 
-  deleteUser(token: string): Observable<string> {
+  deleteUser$(token: string): Observable<string> {
     let h = { Authorization: "Bearer " + token }
     return this.http.delete<string>(this.baseUrl + '/api/utente/delete', { headers: h});
   }
   
-  newUser(username:string,password:string): Observable<string> {
-    let parms=new HttpParams()
-    .append("usernameNew",username)
-    .append("passwordNew",password)
-    return this.http.post<string>(this.baseUrl + "/api/utente/new", { params: parms});
-  }
 
-  getPassword(namePassword:string, token: string):Observable<GetPassword> {
+
+  getPassword(namePassword:string, token: string):Observable<DTOGetPassword> {
     let header={ Authorization: "Bearer " + token }
     let parms=new HttpParams()
-    .append("Name",namePassword);
+    .append("namePassword",namePassword);
 
-    return this.http.get<GetPassword>(this.baseUrl + "/api/password/get", { params: parms, headers: header })
+    return this.http.get<DTOGetPassword>(this.baseUrl + "/api/password/get", { params: parms, headers: header })
   }
-  NewPassword(namePassword:string,password:string, token: string):Observable<string> {
+  postPassword(namePassword:string,password:string, token: string):Observable<string> {
     let header={ Authorization: "Bearer " + token }
     let parms=new HttpParams()
     .append("namePassword",namePassword)
     .append("password",password);
-    return this.http.get<string>(this.baseUrl + "/api/password/new", { params: parms, headers: header })
+    return this.http.post<string>(this.baseUrl + "/api/password/new",null, { params: parms, headers: header })
   }
 
   

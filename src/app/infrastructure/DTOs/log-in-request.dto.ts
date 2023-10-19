@@ -1,4 +1,4 @@
-export interface LogInRequestDto {
+export interface DTOLogInRequestDto {
     username: string
     password: string
 }
