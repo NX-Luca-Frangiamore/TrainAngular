@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { PasswordGenProxyService } from '../infrastructure/password-gen-proxy/password-gen-proxy.service';
 import { ManageTokenService as ManagerTokenService } from '../infrastructure/token-manager/manage-token.service';
 import { Password } from '../infrastructure/Domain/password';
-import { User } from '../infrastructure/Domain/user';
 import { Observable, map } from 'rxjs';
-import { DTOGetPassword } from '../infrastructure/DTOs/get-password';
 @Injectable({
   providedIn: 'root'
 })
@@ -38,8 +36,8 @@ export class UserAreaService {
   }
   getCurrentUsername(): Observable<string> {
     return this.proxy.getUser$(this.tokenManager.getToken()).pipe(
-      map(dto => {
-        return dto.usernameUtente
+      map(username => {
+        return username
       })
     )
 

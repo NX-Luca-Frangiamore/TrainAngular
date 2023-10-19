@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams , HttpErrorResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
 import { DTOGetPassword } from '../DTOs/get-password';
 import { DTOGetUser } from '../DTOs/get-user';
 @Injectable({
@@ -17,17 +17,32 @@ export class PasswordGenProxyService {
     .append("username",username)
     .append("password",password)
 
-    return this.http.post<string>(this.baseUrl + '/login', null,{params:h})
+    return this.http.post<string>(this.baseUrl + '/login', null,{params:h}).pipe(
+          catchError((e)=>{
+            alert(e["error"]["value"])
+            return ""
+          })
+    )
   }
   signIn$(username:string,password:string): Observable<string> {
     let parms=new HttpParams()
     .append("username",username)
     .append("password",password)
-    return this.http.post<string>(this.baseUrl + "/api/utente/new",null, { params: parms});
+    return this.http.post<string>(this.baseUrl + "/api/utente/new",null, { params: parms}).pipe(
+      catchError((e)=>{
+        alert(e["error"]["value"])
+        return ""
+      })
+)
   }
-  getUser$(token: string | null):Observable<DTOGetUser>{
+  getUser$(token: string | null):Observable<string>{
     let header={ Authorization: "Bearer " + token }
-    return this.http.get<DTOGetUser>(this.baseUrl+'/api/utente/get',{headers:header})
+    return this.http.get<string>(this.baseUrl+'/api/utente/get',{headers:header}).pipe(
+      catchError((e)=>{
+        alert(e["error"]["value"])
+        return ""
+      })
+   )
   }
 
   putUser$(usernameNew:string,passwordNew:string,token: string): Observable<string> {
@@ -35,13 +50,23 @@ export class PasswordGenProxyService {
     .append("usernameNew",usernameNew)
     .append("passwordNew",passwordNew)
     let h = { Authorization: "Bearer " + token }
-    return this.http.put<string>(this.baseUrl + '/api/utente/change', null, { headers: h, params: parms});
+    return this.http.put<string>(this.baseUrl + '/api/utente/change', null, { headers: h, params: parms}).pipe(
+      catchError((e)=>{
+        alert(e["error"]["value"])
+        return ""
+      })
+)
   }
   
 
   deleteUser$(token: string): Observable<string> {
     let h = { Authorization: "Bearer " + token }
-    return this.http.delete<string>(this.baseUrl + '/api/utente/delete', { headers: h});
+    return this.http.delete<string>(this.baseUrl + '/api/utente/delete', { headers: h}).pipe(
+      catchError((e)=>{
+        alert(e["error"]["value"])
+        return ""
+      })
+)
   }
   
 
@@ -51,15 +76,24 @@ export class PasswordGenProxyService {
     let parms=new HttpParams()
     .append("namePassword",namePassword);
 
-    return this.http.get<DTOGetPassword>(this.baseUrl + "/api/password/get", { params: parms, headers: header })
+    return this.http.get<DTOGetPassword>(this.baseUrl + "/api/password/get", { params: parms, headers: header }).pipe(
+          catchError((e)=>{
+            alert(e["error"]["value"])
+            return of();
+          })
+    )
   }
   postPassword(namePassword:string,password:string, token: string):Observable<string> {
     let header={ Authorization: "Bearer " + token }
     let parms=new HttpParams()
     .append("namePassword",namePassword)
     .append("password",password);
-    return this.http.post<string>(this.baseUrl + "/api/password/new",null, { params: parms, headers: header })
-  }
-
+    return this.http.post<string>(this.baseUrl + "/api/password/new",null, { params: parms, headers: header }).pipe(
+      catchError((e)=>{
+        alert(e["error"]["value"])
+        return ""
+      })
+      )
+    }
   
 }

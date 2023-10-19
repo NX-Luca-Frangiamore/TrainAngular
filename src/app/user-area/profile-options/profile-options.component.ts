@@ -13,7 +13,7 @@ export class ProfileOptionsComponent {
 
   constructor(private proxy: UserAreaService, private router: Router) {
     proxy.getCurrentUsername().pipe(
-      tap((x) => this.nomeUtente = x.name)
+      tap((x) => this.nomeUtente = x)
     ).subscribe()
   }
   openMenuChange() {
