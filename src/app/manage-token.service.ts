@@ -17,6 +17,6 @@ export class ManageTokenService implements ITokenService {
   }
   
   getToken(){
-    return sessionStorage.getItem("token");
+    return sessionStorage.getItem("token")??"";
   }
 }

@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LogInRequestDto } from '../DTOs/log-in-request.dto';
 import { Observable } from 'rxjs';
-
+import { GetPassword } from '../DTOs/get-password';
+import { LogInRequestDto } from '../DTOs/log-in-request.dto';
+import { User } from '../DTOs/user';
 @Injectable({
   providedIn: 'root'
 })
@@ -20,89 +21,46 @@ export class PasswordGenProxyService {
 
     return this.http.post<string>(this.baseUrl + '/login', dto)
   }
+  getUser(token: string | null):Observable<User>{
+    let header={ Authorization: "Bearer " + token }
+    return this.http.get<User>(this.baseUrl+'/api/utente/get',{headers:header})
+  }
 
+  changeUser(token: string,usernameNew:string,passwordNew:string): Observable<string> {
+    let parms=new HttpParams()
+    .append("usernameNew",usernameNew)
+    .append("passwordNew",passwordNew)
+    let h = { Authorization: "Bearer " + token }
+    return this.http.put<string>(this.baseUrl + '/api/utente/change', null, { headers: h, params: parms});
+  }
+  
 
-  async getUtente(token: string | null): Promise<any> {
-    let h = new HttpHeaders({ Authorization: "Bearer " + token })
-    return new Promise<string>((result) => {
-      let subscribe = this.http.get<string>(url + '/api/utente/get', { headers: h })
-        .subscribe(
-          x => {
-            subscribe.unsubscribe()
-            result(x)
-          }
-        )
-    })
+  deleteUser(token: string): Observable<string> {
+    let h = { Authorization: "Bearer " + token }
+    return this.http.delete<string>(this.baseUrl + '/api/utente/delete', { headers: h});
   }
-  async changeUtente(p: HttpParams, token: string | null): Promise<any> {
-    let h = new HttpHeaders({ Authorization: "Bearer " + token })
-    return new Promise<string>((result) => {
-      let subscribe = this.http.put<string>(url + '/api/utente/change', null, { headers: h, params: p })
-        .subscribe(
-          x => {
-            subscribe.unsubscribe()
-            result(x)
-          }
-        )
-    })
+  
+  newUser(username:string,password:string): Observable<string> {
+    let parms=new HttpParams()
+    .append("usernameNew",username)
+    .append("passwordNew",password)
+    return this.http.post<string>(this.baseUrl + "/api/utente/new", { params: parms});
   }
-  async deleteUtente(token: string | null): Promise<any> {
-    let h = new HttpHeaders({ Authorization: "Bearer " + token })
-    return new Promise<string>((result) => {
-      let subscribe = this.http.delete<string>(url + '/api/utente/delete', { headers: h })
-        .subscribe(
-          x => {
-            subscribe.unsubscribe()
-            result(x)
-          }
-        )
-    })
+
+  getPassword(namePassword:string, token: string):Observable<GetPassword> {
+    let header={ Authorization: "Bearer " + token }
+    let parms=new HttpParams()
+    .append("Name",namePassword);
+
+    return this.http.get<GetPassword>(this.baseUrl + "/api/password/get", { params: parms, headers: header })
   }
-  newUtente(p: HttpParams): Promise<string | null> {
-    return new Promise<string | null>((result) => {
-      let subscribe = this.http.post<string>(url + "/api/utente/new", null, { params: p })
-        .pipe(
-          catchError((error) => {
-            subscribe.unsubscribe();
-            result(null);
-            return error;
-          }
-          )
-        )
-        .subscribe(
-          (x) => {
-            subscribe.unsubscribe()
-            if (typeof x === 'string') {
-              result(x);
-            } else {
-              result(null);
-            }
-          }
-        )
-    })
+  NewPassword(namePassword:string,password:string, token: string):Observable<string> {
+    let header={ Authorization: "Bearer " + token }
+    let parms=new HttpParams()
+    .append("namePassword",namePassword)
+    .append("password",password);
+    return this.http.get<string>(this.baseUrl + "/api/password/new", { params: parms, headers: header })
   }
-  getPassword(p: HttpParams, token: string | null): Promise<any> {
-    let h = new HttpHeaders({ Authorization: "Bearer " + token })
-    return new Promise((result) => {
-      let subscribe = this.http.get(url + "/api/password/get", { params: p, headers: h })
-        .subscribe(
-          x => {
-            subscribe.unsubscribe()
-            result(x)
-          }
-        )
-    })
-  }
-  AddPassword(p: HttpParams, token: string | null): Promise<any> {
-    let h = new HttpHeaders({ Authorization: "Bearer " + token })
-    return new Promise((result) => {
-      let subscribe = this.http.post(url + "/api/password/new", null, { params: p, headers: h })
-        .subscribe(
-          x => {
-            subscribe.unsubscribe()
-            result(x)
-          }
-        )
-    })
-  }
+
+  
 }

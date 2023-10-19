@@ -9,25 +9,25 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ManageTokenService } from './manage-token.service';
 import { RouterModule } from '@angular/router';
-import { HomeComponent } from './Scelte/home/home.component';
+
 import { MatExpansionModule } from '@angular/material/expansion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ShowGetPasswordComponent } from './Scelte/get-password/get-password.component';
-import { AddPasswordComponent } from './Scelte/add-password/add-password.component';
-import { ManageProfileComponent } from './manage-profile/manage-profile.component';
-import { ChangeUtenteComponent } from './manage-profile/change-utente/change-utente.component';
+
 import { PasswordGenProxyModule } from './infrastructure/password-gen-proxy/password-gen-proxy.module';
 import { LoginComponent } from './login/login.component';
+import { GetPasswordPanelComponent } from './user-area/get-password-panel/get-password-panel.component';
+import { ProfileOptionsComponent } from './user-area/profile-options/profile-options.component';
+import { UserAreaComponent } from './user-area/user-area.component';
+import { AddPasswordPanelComponent } from './user-area/add-password-panel/add-password-panel.component';
 export const url: string = "https://localhost:7134"
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    ShowGetPasswordComponent,
-    AddPasswordComponent,
-    ManageProfileComponent,
-    ChangeUtenteComponent,
-    LoginComponent
+    LoginComponent,
+    GetPasswordPanelComponent,
+    ProfileOptionsComponent,
+    UserAreaComponent,
+    AddPasswordPanelComponent
 
   ],
   imports: [

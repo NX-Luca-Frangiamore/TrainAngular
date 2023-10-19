@@ -1,29 +1,12 @@
 <div>
-  <app-profile-options (save)="onSaveCredential($event)"></app-profile-options>
+  <app-profile-options nomeUtente=[nome]></app-profile-options>
 
 
 </div>
 <div class="mainDiv">
   <mat-accordion>
 
-    get-password-panel
-    <!-- <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>Recupera la password</mat-panel-title>
-        <mat-panel-description>inserendo il nome</mat-panel-description>
-      </mat-expansion-panel-header>
-      <app-show-get-password></app-show-get-password>
-    </mat-expansion-panel> -->
-
-    save-password-panel
-    <!-- <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>Inserisci una password</mat-panel-title>
-        <mat-panel-description>inserendo un nome e la password</mat-panel-description>
-      </mat-expansion-panel-header>
-      <app-add-password></app-add-password>
-    </mat-expansion-panel> -->
-
-
+    <app-get-password-panel></app-get-password-panel>
+     <app-add-password-panel></app-add-password-panel>
   </mat-accordion>
 </div>
