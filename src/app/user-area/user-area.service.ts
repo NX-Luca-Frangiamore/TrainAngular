@@ -36,8 +36,8 @@ export class UserAreaService {
   }
   getCurrentUsername(): Observable<string> {
     return this.proxy.getUser$(this.tokenManager.getToken()).pipe(
-      map(username => {
-        return username
+      map(x => {
+        return x.usernameUtente
       })
     )
 

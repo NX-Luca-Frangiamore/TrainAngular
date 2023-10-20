@@ -19,7 +19,7 @@ export class PasswordGenProxyService {
 
     return this.http.post<string>(this.baseUrl + '/login', null,{params:h}).pipe(
           catchError((e)=>{
-            alert(e["error"]["value"])
+            alert(e["error"])
             return ""
           })
     )
@@ -30,17 +30,18 @@ export class PasswordGenProxyService {
     .append("password",password)
     return this.http.post<string>(this.baseUrl + "/api/utente/new",null, { params: parms}).pipe(
       catchError((e)=>{
-        alert(e["error"]["value"])
+        alert(e["error"])
         return ""
       })
-)
+) 
   }
-  getUser$(token: string | null):Observable<string>{
+  getUser$(token: string | null):Observable<DTOGetUser>{
     let header={ Authorization: "Bearer " + token }
-    return this.http.get<string>(this.baseUrl+'/api/utente/get',{headers:header}).pipe(
+    return this.http.get<DTOGetUser>(this.baseUrl+'/api/utente/get',{headers:header}).pipe(
+     
       catchError((e)=>{
-        alert(e["error"]["value"])
-        return ""
+        alert(e["error"])
+        return of()
       })
    )
   }
@@ -52,7 +53,7 @@ export class PasswordGenProxyService {
     let h = { Authorization: "Bearer " + token }
     return this.http.put<string>(this.baseUrl + '/api/utente/change', null, { headers: h, params: parms}).pipe(
       catchError((e)=>{
-        alert(e["error"]["value"])
+        alert(e["error"])
         return ""
       })
 )
@@ -63,7 +64,7 @@ export class PasswordGenProxyService {
     let h = { Authorization: "Bearer " + token }
     return this.http.delete<string>(this.baseUrl + '/api/utente/delete', { headers: h}).pipe(
       catchError((e)=>{
-        alert(e["error"]["value"])
+        alert(e["error"])
         return ""
       })
 )
@@ -78,7 +79,7 @@ export class PasswordGenProxyService {
 
     return this.http.get<DTOGetPassword>(this.baseUrl + "/api/password/get", { params: parms, headers: header }).pipe(
           catchError((e)=>{
-            alert(e["error"]["value"])
+            alert(e["error"])
             return of();
           })
     )
@@ -90,7 +91,7 @@ export class PasswordGenProxyService {
     .append("password",password);
     return this.http.post<string>(this.baseUrl + "/api/password/new",null, { params: parms, headers: header }).pipe(
       catchError((e)=>{
-        alert(e["error"]["value"])
+        alert(e["error"])
         return ""
       })
       )

@@ -17,7 +17,9 @@ export class AddPasswordPanelComponent {
 
   }
   async addPassword() {
-
+    
+    if (!this.form.valid) return
+    
     this.proxy.createPassword(this.form.get("namePassword")?.value, this.form.get("password")?.value).pipe(
       tap(() => this.StatusRequest = 'Done'),
       catchError(() => this.StatusRequest = 'Undone')

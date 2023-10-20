@@ -16,6 +16,8 @@ export class GetPasswordPanelComponent {
   constructor(private proxy:UserAreaService){}
   
   async getPassword(){
+    if (!this.form.valid) return
+    
     this.proxy.getPassword(this.form.get("namePassword")?.value).pipe(
       tap(x=>this.password=x),
       tap((x)=>console.log(x))
