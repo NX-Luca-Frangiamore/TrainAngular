@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { FormGroup,FormControl } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { UserAreaService } from '../user-area.service';
-import {catchError,tap} from 'rxjs'
+import { catchError, of, tap } from 'rxjs'
 @Component({
   selector: 'app-delete-password-panel',
   templateUrl: './delete-password-panel.component.html',
@@ -10,20 +10,30 @@ import {catchError,tap} from 'rxjs'
 export class DeletePasswordPanelComponent {
   StatusRequest = "Undone"
   namePassword?: string
-  constructor(private proxy: UserAreaService) {
+  constructor(private userAreaService: UserAreaService) {
 
   }
   async deletePassword() {
-    
-    
-    this.proxy.deletePassword$(this.namePassword!).pipe(
-      tap(() => this.StatusRequest = 'Done'),
-      catchError(() => this.StatusRequest = 'Undone')
+
+
+    this.userAreaService.deletePassword$(this.namePassword!).pipe(
+      tap(result => {
+        if (result.isSuccess) this.StatusRequest = 'Done'
+        else {
+          alert(result.errorMessage)
+          this.StatusRequest = 'Undone'
+        }
+      }),
+      catchError((e) => {
+        this.StatusRequest = 'Undone'
+        alert("Qualcosa e' andato storto")
+        return of(void 0)
+      })
     ).subscribe()
 
   }
-  cleanField(){
-    this.namePassword=""
-    this.StatusRequest="Undone"
+  cleanField() {
+    this.namePassword = ""
+    this.StatusRequest = "Undone"
   }
 }

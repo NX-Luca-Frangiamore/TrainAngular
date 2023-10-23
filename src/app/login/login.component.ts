@@ -29,9 +29,10 @@ export class LoginComponent {
     if (!this.loginForm.valid) return
 
     this.loginService.logIn$(this.loginForm.controls['username'].value!, this.loginForm.controls['password'].value!).pipe(
+
       tap(token => this.tokenManagerSertvice.setToken(token)),
       tap(() => this.router.navigate(["home"])),
-    
+
     ).subscribe()
   }
 

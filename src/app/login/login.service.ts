@@ -11,14 +11,10 @@ export class LoginService {
 
 
   logIn$(username: string, password: string): Observable<string> {
-    return this.passwordGenProxyService.logIn$(username, password).pipe(
-      map(dto => dto)
-    )
+    return this.passwordGenProxyService.logIn$(username, password)
   }
   SignIn$(username: string, password: string): Observable<string> {
-    return this.passwordGenProxyService.signIn$(username, password).pipe(
-      map(dto => dto)
-    )
+    return this.passwordGenProxyService.signIn$(username, password)
   }
 
 }
