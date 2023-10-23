@@ -9,15 +9,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-change.component.scss']
 })
 export class UserChangeComponent {
-  form:FormGroup= new FormGroup({
-    newUsername:new FormControl(''),
-    newPassword:new FormControl(''),
-})
+    newUsername!:string
+    newPassword!:string
 constructor(private service:UserAreaService,private router:Router){}
 async changeUtente(){
-  if (!this.form.valid) return
-  
-  await this.service.changeCurrentUser(this.form.get("newUsername")?.value,this.form.get("newPassword")?.value).subscribe()
+
+
+  await this.service.changeCurrentUser$(this.newUsername!,this.newPassword!).subscribe()
   this.router.navigate(["home"])
 }
 }

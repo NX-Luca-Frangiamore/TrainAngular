@@ -12,7 +12,7 @@ export class ProfileOptionsComponent {
   nomeUtente!: string
 
   constructor(private proxy: UserAreaService, private router: Router) {
-    proxy.getCurrentUsername().pipe(
+    proxy.getCurrentUsername$().pipe(
       tap((x) => this.nomeUtente = x)
     ).subscribe()
   }
@@ -20,7 +20,7 @@ export class ProfileOptionsComponent {
     this.router.navigate(["home/changeUtente"])
   }
   deleteUtente() {
-    this.proxy.deleteCurrentUser().subscribe()
+    this.proxy.deleteCurrentUser$().subscribe()
     this.router.navigate(["/"])
   }
 

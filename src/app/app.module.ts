@@ -11,6 +11,7 @@ import { ManageTokenService } from './infrastructure/token-manager/manage-token.
 
 import { MatExpansionModule } from '@angular/material/expansion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule }   from '@angular/forms';
 
 import { PasswordGenProxyModule } from './infrastructure/password-gen-proxy/password-gen-proxy.module';
 import { LoginComponent } from './login/login.component';
@@ -19,6 +20,7 @@ import { ProfileOptionsComponent } from './user-area/profile-options/profile-opt
 import { UserAreaComponent } from './user-area/user-area.component';
 import { AddPasswordPanelComponent } from './user-area/add-password-panel/add-password-panel.component';
 import { UserChangeComponent } from './user-area/user-change/user-change.component';
+import { DeletePasswordPanelComponent } from './user-area/delete-password-panel/delete-password-panel.component';
 export const url: string = "https://localhost:7134"
 @NgModule({
   declarations: [
@@ -28,11 +30,13 @@ export const url: string = "https://localhost:7134"
     ProfileOptionsComponent,
     UserAreaComponent,
     AddPasswordPanelComponent,
-    UserChangeComponent
+    UserChangeComponent,
+    DeletePasswordPanelComponent
 
   ],
   imports: [
     BrowserModule,
+    FormsModule  ,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,

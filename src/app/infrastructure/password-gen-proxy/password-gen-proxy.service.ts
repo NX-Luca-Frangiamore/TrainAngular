@@ -72,7 +72,7 @@ export class PasswordGenProxyService {
   
 
 
-  getPassword(namePassword:string, token: string):Observable<DTOGetPassword> {
+  getPassword$(namePassword:string, token: string):Observable<DTOGetPassword> {
     let header={ Authorization: "Bearer " + token }
     let parms=new HttpParams()
     .append("namePassword",namePassword);
@@ -84,7 +84,7 @@ export class PasswordGenProxyService {
           })
     )
   }
-  postPassword(namePassword:string,password:string, token: string):Observable<string> {
+  postPassword$(namePassword:string,password:string, token: string):Observable<string> {
     let header={ Authorization: "Bearer " + token }
     let parms=new HttpParams()
     .append("namePassword",namePassword)
@@ -95,6 +95,17 @@ export class PasswordGenProxyService {
         return ""
       })
       )
+    }
+    deletePassword$(namePassword:string,token: string): Observable<string> {
+      let h = { Authorization: "Bearer " + token }
+      let parms=new HttpParams()
+      .append("namePassword",namePassword)
+      return this.http.delete<string>(this.baseUrl + '/api/password/delete', { headers: h,params:parms}).pipe(
+        catchError((e)=>{
+          alert(e["error"])
+          return ""
+        })
+  )
     }
   
 }

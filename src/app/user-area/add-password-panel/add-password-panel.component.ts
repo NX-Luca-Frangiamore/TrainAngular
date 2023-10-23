@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup,FormsModule} from '@angular/forms';
 import { UserAreaService } from '../user-area.service';
 import { catchError, tap } from 'rxjs';
 @Component({
@@ -9,18 +9,15 @@ import { catchError, tap } from 'rxjs';
 })
 export class AddPasswordPanelComponent {
   StatusRequest = "Undone"
-  form: FormGroup = new FormGroup({
-    namePassword: new FormControl(""),
-    password: new FormControl("")
-  })
+  namePassword?:string
+    password?: string
   constructor(private proxy: UserAreaService) {
 
   }
   async addPassword() {
-    
-    if (!this.form.valid) return
-    
-    this.proxy.createPassword(this.form.get("namePassword")?.value, this.form.get("password")?.value).pipe(
+
+
+    this.proxy.createPassword$(this.namePassword!, this.password!).pipe(
       tap(() => this.StatusRequest = 'Done'),
       catchError(() => this.StatusRequest = 'Undone')
     ).subscribe()

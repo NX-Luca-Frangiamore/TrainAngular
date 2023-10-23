@@ -11,30 +11,35 @@ export class UserAreaService {
   constructor(private proxy: PasswordGenProxyService, private tokenManager: ManagerTokenService) {
   }
 
-  getPassword(namePassword: string): Observable<Password> {
-    return this.proxy.getPassword(namePassword, this.tokenManager.getToken()).pipe(
+  getPassword$(namePassword: string): Observable<Password> {
+    return this.proxy.getPassword$(namePassword, this.tokenManager.getToken()).pipe(
       map(dto => {
         return { key: dto.name, value: dto.password }
       })
     )
   }
 
-  createPassword(namePassword: string, password: string): Observable<string> {
-    return this.proxy.postPassword(namePassword, password, this.tokenManager.getToken()).pipe(
+  createPassword$(namePassword: string, password: string): Observable<string> {
+    return this.proxy.postPassword$(namePassword, password, this.tokenManager.getToken()).pipe(
       map(x => x)
     )
   }
-  changeCurrentUser(newUsername: string, newPassword: string): Observable<string> {
+  deletePassword$(namePassword: string): Observable<string> {
+    return this.proxy.deletePassword$(namePassword, this.tokenManager.getToken()).pipe(
+      map(x => x)
+    )
+  }
+  changeCurrentUser$(newUsername: string, newPassword: string): Observable<string> {
     return this.proxy.putUser$(newUsername, newPassword, this.tokenManager.getToken()).pipe(
       map(x => x)
     )
   }
-  deleteCurrentUser(): Observable<string> {
+  deleteCurrentUser$(): Observable<string> {
     return this.proxy.deleteUser$(this.tokenManager.getToken()).pipe(
       map(x => x)
     )
   }
-  getCurrentUsername(): Observable<string> {
+  getCurrentUsername$(): Observable<string> {
     return this.proxy.getUser$(this.tokenManager.getToken()).pipe(
       map(x => {
         return x.usernameUtente
