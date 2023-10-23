@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule } from '@angular/forms';
 import { UserAreaService } from '../user-area.service';
 import { catchError, finalize, of, tap } from 'rxjs';
-import { handleError } from 'src/app/utils/hanlde-error.pipe';
+import { handleError } from 'src/app/utils/hanlde-error.function';
 @Component({
   selector: 'app-add-password-panel',
   templateUrl: './add-password-panel.component.html',
