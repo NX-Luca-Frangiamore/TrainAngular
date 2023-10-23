@@ -22,4 +22,8 @@ export class DeletePasswordPanelComponent {
     ).subscribe()
 
   }
+  cleanField(){
+    this.namePassword=""
+    this.StatusRequest="Undone"
+  }
 }

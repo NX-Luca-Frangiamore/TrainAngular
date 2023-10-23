@@ -23,5 +23,8 @@ export class ProfileOptionsComponent {
     this.proxy.deleteCurrentUser$().subscribe()
     this.router.navigate(["/"])
   }
+  logOut(){
+    this.router.navigate(["/"])
+  }
 
 }

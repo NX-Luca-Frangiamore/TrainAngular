@@ -23,4 +23,9 @@ export class AddPasswordPanelComponent {
     ).subscribe()
 
   }
+  cleanField(){
+    this.namePassword=""
+    this.password=""
+    this.StatusRequest="Undone"
+  }
 }

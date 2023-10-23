@@ -1,3 +1,19 @@
-.divContainer{
-    text-align:center
+.divMain{
+    display:flex ;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.divContent{
+    border: 5px solid black;
+    border-radius: 10%;
+    padding: 20PX;
+}
+button{
+    margin: 10px;
+}
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+    
 }

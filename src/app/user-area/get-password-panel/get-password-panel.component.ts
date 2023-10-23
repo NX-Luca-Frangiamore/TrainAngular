@@ -20,4 +20,8 @@ export class GetPasswordPanelComponent {
     ).subscribe()
     
   }
+  cleanField(){
+    this.namePassword=""
+  }
+
 }

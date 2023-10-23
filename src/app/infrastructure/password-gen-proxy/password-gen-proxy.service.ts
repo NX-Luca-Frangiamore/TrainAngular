@@ -38,12 +38,8 @@ export class PasswordGenProxyService {
   getUser$(token: string | null):Observable<DTOGetUser>{
     let header={ Authorization: "Bearer " + token }
     return this.http.get<DTOGetUser>(this.baseUrl+'/api/utente/get',{headers:header}).pipe(
-     
-      catchError((e)=>{
-        alert(e["error"])
-        return of()
-      })
-   )
+)
+   
   }
 
   putUser$(usernameNew:string,passwordNew:string,token: string): Observable<string> {
