@@ -11,7 +11,7 @@ import { ManageTokenService } from './infrastructure/token-manager/manage-token.
 
 import { MatExpansionModule } from '@angular/material/expansion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { PasswordGenProxyModule } from './infrastructure/password-gen-proxy/password-gen-proxy.module';
 import { LoginComponent } from './login/login.component';
@@ -21,7 +21,7 @@ import { UserAreaComponent } from './user-area/user-area.component';
 import { AddPasswordPanelComponent } from './user-area/add-password-panel/add-password-panel.component';
 import { UserChangeComponent } from './user-area/user-change/user-change.component';
 import { DeletePasswordPanelComponent } from './user-area/delete-password-panel/delete-password-panel.component';
-export const url: string = "https://localhost:7134"
+export const url: string = 'https://localhost:7134';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,12 +31,11 @@ export const url: string = "https://localhost:7134"
     UserAreaComponent,
     AddPasswordPanelComponent,
     UserChangeComponent,
-    DeletePasswordPanelComponent
-
+    DeletePasswordPanelComponent,
   ],
   imports: [
     BrowserModule,
-    FormsModule  ,
+    FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -44,10 +43,9 @@ export const url: string = "https://localhost:7134"
     BrowserAnimationsModule,
     MatButtonModule,
     MatMenuModule,
-    PasswordGenProxyModule
+    PasswordGenProxyModule,
   ],
   providers: [ManageTokenService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-
-export class AppModule { }
+export class AppModule {}

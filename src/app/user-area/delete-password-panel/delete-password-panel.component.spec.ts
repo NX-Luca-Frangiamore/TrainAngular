@@ -8,7 +8,7 @@ describe('DeletePasswordPanelComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [DeletePasswordPanelComponent]
+      declarations: [DeletePasswordPanelComponent],
     });
     fixture = TestBed.createComponent(DeletePasswordPanelComponent);
     component = fixture.componentInstance;

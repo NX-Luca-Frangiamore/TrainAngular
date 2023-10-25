@@ -1,4 +1,4 @@
-export interface NewPassword{
-    namePassword:string,
-    password:string
+export interface NewPassword {
+  namePassword: string;
+  password: string;
 }

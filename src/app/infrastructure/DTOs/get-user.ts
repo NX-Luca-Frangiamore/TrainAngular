@@ -1,4 +1,4 @@
-export interface DTOGetUser{
-    usernameUtente:string,
-    passwordUtente:string
+export interface DTOGetUser {
+  usernameUtente: string;
+  passwordUtente: string;
 }

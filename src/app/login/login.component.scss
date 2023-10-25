@@ -1,19 +1,18 @@
-.divMain{
-    display:flex ;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+.divMain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
-.divContent{
-    border: 5px solid black;
-    border-radius: 10%;
-    padding: 20PX;
+.divContent {
+  border: 5px solid black;
+  border-radius: 10%;
+  padding: 20px;
 }
-button{
-    margin: 10px;
+button {
+  margin: 10px;
 }
-.buttonContainer{
-    display: flex;
-    justify-content: center;
-    
+.buttonContainer {
+  display: flex;
+  justify-content: center;
 }

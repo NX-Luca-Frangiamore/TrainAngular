@@ -1,4 +1,4 @@
-export interface DTOInputToChangeUser{
-     usernameNew:string,
-     passwordNew:string
+export interface DTOInputToChangeUser {
+  usernameNew: string;
+  passwordNew: string;
 }

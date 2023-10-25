@@ -5,13 +5,13 @@ import { UserAreaComponent } from './user-area/user-area.component';
 import { UserChangeComponent } from './user-area/user-change/user-change.component';
 
 const routes: Routes = [
-  { path: "", component: LoginComponent },
-  { path: "home", component: UserAreaComponent },
-  { path: "home/changeUtente", component: UserChangeComponent }
+  { path: '', component: LoginComponent },
+  { path: 'home', component: UserAreaComponent },
+  { path: 'home/changeUtente', component: UserChangeComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

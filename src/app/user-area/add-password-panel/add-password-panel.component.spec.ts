@@ -8,7 +8,7 @@ describe('AddPasswordPanelComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AddPasswordPanelComponent]
+      declarations: [AddPasswordPanelComponent],
     });
     fixture = TestBed.createComponent(AddPasswordPanelComponent);
     component = fixture.componentInstance;

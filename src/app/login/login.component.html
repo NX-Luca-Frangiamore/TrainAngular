@@ -1,15 +1,15 @@
 <div class="divMain">
   <div class="divContent">
-  <h1>Login</h1>
-  <form [formGroup]="loginForm">
-    <label>Username</label><br>
-    <input type="text" name="username" formControlName="username"><br>
-    <label>Password</label><br>
-    <input type="password" name="password" formControlName="password"><br>
-    <div class="buttonContainer">
-      <button (click)="onLoginClick()">Login</button>
-      <button (click)="onSinginClick()">Sign in</button>
-    </div> 
-  </form>
-</div>
+    <h1>Login</h1>
+    <form [formGroup]="loginForm">
+      <label>Username</label><br />
+      <input type="text" name="username" formControlName="username" /><br />
+      <label>Password</label><br />
+      <input type="password" name="password" formControlName="password" /><br />
+      <div class="buttonContainer">
+        <button (click)="onLoginClick()">Login</button>
+        <button (click)="onSinginClick()">Sign in</button>
+      </div>
+    </form>
+  </div>
 </div>

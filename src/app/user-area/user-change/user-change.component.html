@@ -1,11 +1,13 @@
 <div class="mainDiv">
-<div class="divContainer">
-        <form #form="ngForm">
-            <label>Nuovo nome</label>
-            <input type="text" name="newUsername" [(ngModel)]="newUsername"><br>
-            <label>Nuova password</label>
-            <input type="text" name="newPassword" [(ngModel)]="newPassword"><br>
-            <button (click)="changeUtente()">Cambia</button>
-        </form>
-</div>
+  <div class="divBorder">
+    <div class="divContainer">
+      <form #form="ngForm">
+        <label>Nuovo nome</label>
+        <input type="text" name="newUsername" [(ngModel)]="newUsername" /><br />
+        <label>Nuova password</label>
+        <input type="text" name="newPassword" [(ngModel)]="newPassword" /><br />
+        <button (click)="changeUtente()">Cambia</button>
+      </form>
+    </div>
+  </div>
 </div>

@@ -1,4 +1,4 @@
-export interface GetUserRequest{
-    username:string,
-    passowrd:string
+export interface GetUserRequest {
+  username: string;
+  passowrd: string;
 }

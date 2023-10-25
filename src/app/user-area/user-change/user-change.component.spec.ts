@@ -8,7 +8,7 @@ describe('UserChangeComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [UserChangeComponent]
+      declarations: [UserChangeComponent],
     });
     fixture = TestBed.createComponent(UserChangeComponent);
     component = fixture.componentInstance;

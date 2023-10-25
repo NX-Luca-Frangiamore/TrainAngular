@@ -1,4 +1,4 @@
-export interface DTOGetPassword{
-    name:string,
-    password:string
+export interface DTOGetPassword {
+  name: string;
+  password: string;
 }
